@@ -1,51 +1,51 @@
-import React from 'react'
-import { Button } from '@/Components/ui/button'
+import React from 'react';
+import { Button } from '@/Components/ui/button';
 import {
   Card,
   CardAction,
   CardContent,
   CardHeader,
-  CardTitle
-} from '@/Components/ui/card'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from './firebaseStore'
-import { toast } from 'sonner'
-import { useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import FormInput from './FormInput'
-import { useDispatch } from 'react-redux'
-import { login } from './authSlice'
+  CardTitle,
+} from '@/Components/ui/card';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from './firebaseStore';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import FormInput from './FormInput';
+import { useDispatch } from 'react-redux';
+import { login } from './authSlice';
 
 const Login = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const schema = z.object({
     email: z.string().email('Email Not Allowed'),
-    password: z.string().min(6, 'Password must have more than 6 characters')
-  })
+    password: z.string().min(6, 'Password must have more than 6 characters'),
+  });
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
-    mode: 'onBlur'
-  })
+    mode: 'onBlur',
+  });
 
   const handleLogin = async data => {
-    const { email, password } = data
+    const { email, password } = data;
     try {
-      await signInWithEmailAndPassword(auth, email, password)
-      const user = auth.currentUser
-      dispatch(login({ uid: user.uid, email: user.email }))
-      toast.success(`Login Successfully!`)
-      navigate('/dashboard')
+      await signInWithEmailAndPassword(auth, email, password);
+      const user = auth.currentUser;
+      dispatch(login({ uid: user.uid, email: user.email }));
+      toast.success(`Login Successfully!`);
+      navigate('/dashboard');
     } catch {
-      toast.error('Oops! Incrrect Email or password')
+      toast.error('Oops! Incrrect Email or password');
     }
-  }
+  };
   return (
     <Card>
       <CardHeader>
@@ -83,6 +83,6 @@ const Login = () => {
         </form>
       </CardContent>
     </Card>
-  )
-}
-export default Login
+  );
+};
+export default Login;

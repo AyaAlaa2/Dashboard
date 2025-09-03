@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const PageNotFound = () => {
   return (
@@ -8,7 +8,7 @@ const PageNotFound = () => {
         Oops !! Page Not Found
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default PageNotFound
+export default PageNotFound;

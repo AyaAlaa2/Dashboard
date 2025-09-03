@@ -1,5 +1,5 @@
-import React from 'react'
-import { Input } from '@/Components/ui/input'
+import React from 'react';
+import { Input } from '@/Components/ui/input';
 
 const InputField = ({
   label,
@@ -9,7 +9,7 @@ const InputField = ({
   placeholder,
   required,
   accept,
-  onChange
+  onChange,
 }) => {
   return (
     <Input
@@ -21,7 +21,7 @@ const InputField = ({
       accept={accept}
       onChange={onChange}
     />
-  )
-}
+  );
+};
 
-export default InputField
+export default InputField;

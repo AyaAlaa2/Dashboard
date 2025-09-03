@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button } from '@/Components/ui/button'
+import React from 'react';
+import { Button } from '@/Components/ui/button';
 import {
   Card,
   CardAction,
@@ -7,41 +7,41 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle
-} from '@/Components/ui/card'
-import { auth } from './firebaseStore'
-import { toast } from 'sonner'
-import { useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { sendPasswordResetEmail } from 'firebase/auth'
-import FormInput from './FormInput'
+  CardTitle,
+} from '@/Components/ui/card';
+import { auth } from './firebaseStore';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import FormInput from './FormInput';
 
 const ForgetPassword = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const schema = z.object({
-    email: z.string().email('Email Not Allowed')
-  })
+    email: z.string().email('Email Not Allowed'),
+  });
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
   } = useForm({
-    resolver: zodResolver(schema)
-  })
+    resolver: zodResolver(schema),
+  });
 
   const hanldeResetPassword = async () => {
-    const emailVal = watch('email')
+    const emailVal = watch('email');
     try {
-      await sendPasswordResetEmail(auth, emailVal)
-      toast.success('Check your email! A password reset link has been sent !')
-      navigate('/login')
+      await sendPasswordResetEmail(auth, emailVal);
+      toast.success('Check your email! A password reset link has been sent !');
+      navigate('/login');
     } catch {
-      toast.error('Oops! An Error Occurred !')
+      toast.error('Oops! An Error Occurred !');
     }
-  }
+  };
   return (
     <div>
       <Card>
@@ -66,7 +66,7 @@ const ForgetPassword = () => {
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default ForgetPassword
+export default ForgetPassword;

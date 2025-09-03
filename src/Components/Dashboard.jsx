@@ -1,35 +1,35 @@
-import React, { useEffect, useState } from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar'
-import { Button } from '@/Components/ui/button'
+import React, { useEffect, useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar';
+import { Button } from '@/Components/ui/button';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-  CardTitle
-} from '@/Components/ui/card'
-import { Label } from '@/Components/ui/label'
-import { auth } from './firebaseStore'
-import { useNavigate } from 'react-router-dom'
-import fetchUserData from './fetchUserData'
-import { Logout } from './Logout'
-import { SendValidation } from './SendValidation'
-import Loading from './Loading'
+  CardTitle,
+} from '@/Components/ui/card';
+import { Label } from '@/Components/ui/label';
+import { auth } from './firebaseStore';
+import { useNavigate } from 'react-router-dom';
+import fetchUserData from './fetchUserData';
+import { Logout } from './Logout';
+import { SendValidation } from './SendValidation';
+import Loading from './Loading';
 
 const Dashboard = () => {
-  const [userDetailes, setUserDetailes] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const navigate = useNavigate()
+  const [userDetailes, setUserDetailes] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUserData({
       onSuccess: data => {
-        setUserDetailes(data)
-        setLoading(false)
+        setUserDetailes(data);
+        setLoading(false);
       },
-      onFail: () => setLoading(false)
-    })
-  }, [])
+      onFail: () => setLoading(false),
+    });
+  }, []);
 
   return (
     <div>
@@ -41,7 +41,7 @@ const Dashboard = () => {
             <CardTitle>Welcome !</CardTitle>
             <Avatar className='w-12 h-12 inline-block'>
               <AvatarImage
-                src={userDetailes?.profileImage}
+                src={userDetailes.profileImage}
                 alt='Profile picture'
               />
               <AvatarFallback>Image</AvatarFallback>
@@ -76,7 +76,7 @@ const Dashboard = () => {
             <Button
               type='submit'
               onClick={() => {
-                navigate('/updateUser')
+                navigate('/updateUser');
               }}
             >
               Update
@@ -88,7 +88,7 @@ const Dashboard = () => {
         </Card>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

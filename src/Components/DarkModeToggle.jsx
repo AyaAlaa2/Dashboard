@@ -1,28 +1,28 @@
-import { useState, useEffect } from 'react'
-import { IoMoon } from 'react-icons/io5'
-import { FiSun } from 'react-icons/fi'
+import { useState, useEffect } from 'react';
+import { IoMoon } from 'react-icons/io5';
+import { FiSun } from 'react-icons/fi';
 
 export default function DarkModeToggle () {
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme')
+    const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
-      document.documentElement.classList.add('dark')
-      setIsDark(true)
+      document.documentElement.classList.add('dark');
+      setIsDark(true);
     }
-  }, [])
+  }, []);
 
   const toggleTheme = () => {
     if (isDark) {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     } else {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     }
-    setIsDark(!isDark)
-  }
+    setIsDark(!isDark);
+  };
 
   return (
     <button
@@ -35,5 +35,5 @@ export default function DarkModeToggle () {
         <IoMoon className='text-white' />
       )}
     </button>
-  )
+  );
 }

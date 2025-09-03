@@ -1,8 +1,8 @@
-import React from 'react'
-import { Label } from '@/Components/ui/label'
-import InputField from './InputField'
-import { useNavigate } from 'react-router-dom'
-import { Button } from '@/Components/ui/button'
+import React from 'react';
+import { Label } from '@/Components/ui/label';
+import InputField from './InputField';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '@/Components/ui/button';
 
 const FormInput = ({
   label,
@@ -11,7 +11,7 @@ const FormInput = ({
   rightNavigateElement,
   ...props
 }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className='grid gap-2'>
       <div className='flex items-center justify-between'>
@@ -33,7 +33,7 @@ const FormInput = ({
         <p className='text-red-500 text-sm'>{error.message}</p>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default FormInput
+export default FormInput;

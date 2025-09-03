@@ -1,55 +1,55 @@
-import React from 'react'
-import { Button } from '@/Components/ui/button'
+import React from 'react';
+import { Button } from '@/Components/ui/button';
 import {
   Card,
   CardAction,
   CardContent,
   CardHeader,
-  CardTitle
-} from '@/Components/ui/card'
-import { toast } from 'sonner'
-import { auth, database } from './firebaseStore'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { doc, setDoc } from 'firebase/firestore'
-import { useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import uploadImageToCloudinary from './uploadImageToCloudinary'
-import FormInput from './FormInput'
+  CardTitle,
+} from '@/Components/ui/card';
+import { toast } from 'sonner';
+import { auth, database } from './firebaseStore';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import uploadImageToCloudinary from './uploadImageToCloudinary';
+import FormInput from './FormInput';
 
 const Signup = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const formSchema = z.object({
     name: z.string().min(2, 'Name must have more than 2 characters'),
     email: z.string().email('Invaled Email'),
-    password: z.string().min(6, 'Password must have more than 6 characters')
-  })
+    password: z.string().min(6, 'Password must have more than 6 characters'),
+  });
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
   } = useForm({
     resolver: zodResolver(formSchema),
     mode: 'onBlur',
     defaultValues: {
-      image: null
-    }
-  })
+      image: null,
+    },
+  });
 
   const handleSignup = async data => {
     try {
-      const { name, email, password } = data
+      const { name, email, password } = data;
 
-      const imageFile = watch('image')?.[0]
-      let imageURL = ''
+      const imageFile = watch('image')?.[0];
+      let imageURL = '';
       if (imageFile) {
-        imageURL = await uploadImageToCloudinary(imageFile)
+        imageURL = await uploadImageToCloudinary(imageFile);
       }
 
-      await createUserWithEmailAndPassword(auth, email, password)
-      const user = auth.currentUser
+      await createUserWithEmailAndPassword(auth, email, password);
+      const user = auth.currentUser;
 
       if (user) {
         await setDoc(doc(database, 'Users', user.uid), {
@@ -57,16 +57,16 @@ const Signup = () => {
           email: user.email,
           name: name,
           password: password,
-          profileImage: imageURL
-        })
+          profileImage: imageURL,
+        });
       }
 
-      navigate('/login')
-      toast.success(`Signup Successfully! Welcome ${name}`)
+      navigate('/login');
+      toast.success(`Signup Successfully! Welcome ${name}`);
     } catch {
-      toast.error('Oops! Signup failed')
+      toast.error('Oops! Signup failed');
     }
-  }
+  };
 
   return (
     <Card>
@@ -126,7 +126,7 @@ const Signup = () => {
         </form>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
