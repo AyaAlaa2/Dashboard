@@ -17,9 +17,11 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import uploadImageToCloudinary from './uploadImageToCloudinary';
 import FormInput from './FormInput';
+import useDocTitle from './useDocTitle';
 
 const Signup = () => {
   const navigate = useNavigate();
+  useDocTitle('Signup');
   const formSchema = z.object({
     name: z.string().min(2, 'Name must have more than 2 characters'),
     email: z.string().email('Invaled Email'),

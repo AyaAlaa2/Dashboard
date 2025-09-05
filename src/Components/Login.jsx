@@ -17,10 +17,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import FormInput from './FormInput';
 import { useDispatch } from 'react-redux';
 import { login } from './authSlice';
+import useDocTitle from './useDocTitle';
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  useDocTitle('Login');
+
   const schema = z.object({
     email: z.string().email('Email Not Allowed'),
     password: z.string().min(6, 'Password must have more than 6 characters'),

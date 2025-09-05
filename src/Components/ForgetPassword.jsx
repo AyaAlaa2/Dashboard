@@ -17,9 +17,12 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import FormInput from './FormInput';
+import useDocTitle from './useDocTitle';
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
+  useDocTitle('Reset Password');
+
   const schema = z.object({
     email: z.string().email('Email Not Allowed'),
   });
@@ -30,6 +33,7 @@ const ForgetPassword = () => {
     watch,
   } = useForm({
     resolver: zodResolver(schema),
+    mode: 'onBlur',
   });
 
   const hanldeResetPassword = async () => {

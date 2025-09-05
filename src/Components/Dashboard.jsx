@@ -15,11 +15,13 @@ import fetchUserData from './fetchUserData';
 import { Logout } from './Logout';
 import { SendValidation } from './SendValidation';
 import Loading from './Loading';
+import useDocTitle from './useDocTitle';
 
 const Dashboard = () => {
   const [userDetailes, setUserDetailes] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  useDocTitle('Dashboard');
 
   useEffect(() => {
     fetchUserData({

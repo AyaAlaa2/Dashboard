@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/Components/ui/avatar';
 import { Button } from '@/Components/ui/button';
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/Components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card';
 import { toast } from 'sonner';
 import { auth, database } from './firebaseStore';
 import { doc, updateDoc } from 'firebase/firestore';
@@ -26,13 +18,14 @@ import uploadImageToCloudinary from './uploadImageToCloudinary';
 import fetchUserData from './fetchUserData';
 import FormInput from './FormInput';
 import Loading from './Loading';
+import useDocTitle from './useDocTitle';
 
 const UpdatePage = () => {
   const [loading, setLoading] = useState(true);
   const [profileImageURL, setProfileImageURL] = useState('');
   const [newImageFile, setNewImageFile] = useState(null);
-
   const navigate = useNavigate();
+  useDocTitle('Update');
   const schema = z.object({
     name: z.string().min(2, 'Name must have more than 2 characters'),
     email: z.string().email('Your email not allowed'),
